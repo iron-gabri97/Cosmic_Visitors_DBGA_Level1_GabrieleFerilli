@@ -1,0 +1,11 @@
+##############################################################################
+
+Asset "Starfield Background" made by Sauer2
+
+License (CC0): https://creativecommons.org/publicdomain/zero/1.0/
+
+You may use these graphics in personal and commercial projects.
+
+Asset downloaded from: https://opengameart.org/content/starfield-background
+
+##############################################################################	
