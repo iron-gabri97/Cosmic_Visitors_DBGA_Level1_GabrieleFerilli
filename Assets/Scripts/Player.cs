@@ -29,9 +29,6 @@ public class Player : MonoBehaviour
         Health = PlayerHealth;
         Damage = PlayerDamage;
 
-        EventManager.Instance.StartInitPlayerHealthEvent(Health);
-        EventManager.Instance.StartInitPlayerLivesEvent(Lives);
-
         playerStartingPosition = transform.position;
 
         bulletRenderer = BulletPrefab.GetComponent<SpriteRenderer>();
@@ -42,6 +39,9 @@ public class Player : MonoBehaviour
     {
         EventManager.Instance.OnGameReInit += ResetPlayerData;
         EventManager.Instance.OnPlayerDamage += TakeDamage;
+
+        EventManager.Instance.StartInitPlayerHealthEvent(Health);
+        EventManager.Instance.StartInitPlayerLivesEvent(Lives);
     }
 
     private void OnDisable()
