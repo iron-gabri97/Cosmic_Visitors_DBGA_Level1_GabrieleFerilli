@@ -2514,15 +2514,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aadf3b91f06970042a283d2db917eb5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 0
+  MoveSpeed: 5
   MoveAction:
     m_Name: Move
-    m_Type: 0
+    m_Type: 1
     m_ExpectedControlType: 
-    m_Id: 75b6d5e9-fb55-44d9-b616-e4fef3dead45
+    m_Id: ad24d48a-d83e-49cb-bf7c-510509f5dd9a
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 1D Axis
+      m_Id: 14374f90-fe95-4882-81b5-b019d2ce528e
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: 80779d84-c0d5-4f64-b568-0106d7f68cec
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: AxisDeadzone
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: 930cb346-7907-43c6-bef9-c3e8e5c90c06
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: AxisDeadzone
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
     m_Flags: 0
   PauseAction:
     m_Name: Pause
@@ -2531,7 +2555,15 @@ MonoBehaviour:
     m_Id: f19f81bc-4afc-423a-b777-ee2a015d2ef3
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 04e0a084-cccd-4c4a-8245-d0925ea5cb35
+      m_Path: <Keyboard>/p
+      m_Interactions: Press
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pause
+      m_Flags: 0
     m_Flags: 0
 --- !u!1 &1127807933
 GameObject:
@@ -3171,6 +3203,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -3212,15 +3245,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abaa999e5c81ec40a5d2cac588f8756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameStartPanel: {fileID: 0}
-  InGamePanel: {fileID: 0}
-  GamePausePanel: {fileID: 0}
-  GameOverPanel: {fileID: 0}
-  PlayerHealthBar: {fileID: 0}
+  GameStartPanel: {fileID: 108839923}
+  InGamePanel: {fileID: 1858533892}
+  GamePausePanel: {fileID: 309431439}
+  GameOverPanel: {fileID: 902688494}
+  PlayerHealthBar: {fileID: 114966120}
   PlayerLives: []
-  UFOBossHealthBar: {fileID: 0}
-  GameOverWinText: {fileID: 0}
-  GameOverLoseText: {fileID: 0}
+  UFOBossHealthBar: {fileID: 1507529587}
+  GameOverWinText: {fileID: 319490683}
+  GameOverLoseText: {fileID: 370048166}
 --- !u!1 &1243211305
 GameObject:
   m_ObjectHideFlags: 0
