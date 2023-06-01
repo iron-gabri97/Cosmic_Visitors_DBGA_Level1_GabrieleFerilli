@@ -54,7 +54,12 @@ public class UFOEnemy : MonoBehaviour, IDamageable, IShooter
 
     private void Start()
     {
-        spriteRenderer.sprite = UFOEnemyScriptable.UFOEnemySprite;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+            spriteRenderer.sprite = UFOEnemyScriptable.UFOEnemySprite;
+        else
+            Debug.LogWarning("There is no sprite renderer component attached!");
 
         Health = UFOEnemyScriptable.UFOEnemyHealth;
         Damage = UFOEnemyScriptable.UFOEnemyDamage;
