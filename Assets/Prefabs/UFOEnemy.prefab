@@ -46,10 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba2d61b0bdf37f40bd79dd38090dd83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemies:
-  - {fileID: 11400000, guid: e031885b7ad17f14bb0cd0fba9aaff81, type: 2}
+  UFOEnemies: []
   bulletPrefab: {fileID: 6174548050345330627, guid: c4063e79bf5125c47a76071fdf41ddab, type: 3}
-  EnemyScriptable: {fileID: 11400000, guid: e031885b7ad17f14bb0cd0fba9aaff81, type: 2}
+  UFOEnemyScriptable: {fileID: 11400000, guid: e031885b7ad17f14bb0cd0fba9aaff81, type: 2}
 --- !u!212 &3694393262297321194
 SpriteRenderer:
   m_ObjectHideFlags: 0
