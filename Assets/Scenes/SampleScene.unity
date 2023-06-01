@@ -2421,12 +2421,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dede5ca0506a5c048bdd119469586917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Lives: 0
-  PlayerHealth: 0
-  PlayerDamage: 0
+  Lives: 3
+  PlayerHealth: 15
+  PlayerDamage: 1
   BulletPrefab: {fileID: 6174548050345330627, guid: c4063e79bf5125c47a76071fdf41ddab, type: 3}
   BulletSprite: {fileID: 947486891, guid: 062e83ee7c6c3a84f807b494795a151e, type: 3}
-  TimeBetweenBullets: 0
+  TimeBetweenBullets: 0.4
 --- !u!50 &1000943650
 Rigidbody2D:
   serializedVersion: 4
@@ -2514,15 +2514,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aadf3b91f06970042a283d2db917eb5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 0
+  MoveSpeed: 8
   MoveAction:
     m_Name: Move
     m_Type: 0
-    m_ExpectedControlType: 
+    m_ExpectedControlType: Axis
     m_Id: 75b6d5e9-fb55-44d9-b616-e4fef3dead45
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c008a2c1-822f-4fb5-9661-1b599941683b
+      m_Path: <Keyboard>/rightArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 90f79c42-de24-4ba3-a9f8-a3915163554a
+      m_Path: <Keyboard>/leftArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 0
     m_Flags: 0
   PauseAction:
     m_Name: Pause
@@ -2531,7 +2547,15 @@ MonoBehaviour:
     m_Id: f19f81bc-4afc-423a-b777-ee2a015d2ef3
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 4c36d2ce-f581-4fb8-9867-4a9a4a1fa303
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pause
+      m_Flags: 0
     m_Flags: 0
 --- !u!1 &1127807933
 GameObject:
