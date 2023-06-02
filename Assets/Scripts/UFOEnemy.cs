@@ -130,7 +130,7 @@ public class UFOEnemy : MonoBehaviour, IDamageable, IShooter
 
     private void Move()
     {
-        moveTimer = 0.4f;
+        moveTimer = 0.5f;
 
         if (transform.position.x >= boundRight - halfSpriteSize.x)
         {
