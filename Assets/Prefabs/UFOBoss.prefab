@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1133570708269173780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74cf42cbc958c9f409530707307d9d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 5
   UFOBossPrefab: {fileID: 1133570708269173780}
   UFOBossScriptable: {fileID: 11400000, guid: cd5cdf201c9b8774bbf97abaf6ae8e0e, type: 2}
 --- !u!212 &1133570708269173781
@@ -90,12 +90,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 171149fd9884681439f583e21731ee9b, type: 3}
+  m_Sprite: {fileID: 1534188052, guid: 171149fd9884681439f583e21731ee9b, type: 3}
   m_Color: {r: 0.33340237, g: 0.8980392, b: 0.31372547, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.26875, y: 3.025}
+  m_Size: {x: 3.4866667, y: 2.5733333}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -137,8 +137,8 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.26875, y: 3.025}
-    newSize: {x: 3.26875, y: 3.025}
+    oldSize: {x: 3.4866667, y: 2.5733333}
+    newSize: {x: 3.4866667, y: 2.5733333}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
