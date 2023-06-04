@@ -10,7 +10,6 @@ public class UFOEnemyScriptable : ScriptableObject
     public Sprite UFOEnemySprite;
     public GameObject UFOEnemyBulletPrefab;
     public Sprite UFOEnemyBulletSprite;
-    public float TimeBetweenShots;
     public int NumberOfBullets;
     public int MinShotAngle;
     public int MaxShotAngle;

@@ -147,7 +147,7 @@ public class GameController : MonoSingleton<GameController>
         {
             isPlayingLevel = false;
 
-            if (currentLevelNumber < MaxNumberOfLevels)
+            if (currentLevelNumber <= MaxNumberOfLevels)
             {
                 NextLevel();
             }
@@ -166,7 +166,7 @@ public class GameController : MonoSingleton<GameController>
             currentLevelNumber++;
         }
 
-        if (currentLevelNumber % 5 == 0)
+        if (currentLevelNumber % MaxNumberOfLevels == 0)
         {
             EventManager.Instance.StartUFOBossLevelEvent();
             isPlayingLevel = true;

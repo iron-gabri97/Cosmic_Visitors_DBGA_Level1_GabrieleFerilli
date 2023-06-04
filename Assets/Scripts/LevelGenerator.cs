@@ -35,7 +35,7 @@ public class LevelGenerator : MonoSingleton<LevelGenerator>
         boundRight = Helper.GetScreenBoundRight(camera);
         boundLeft = Helper.GetScreenBoundLeft(camera);
         boundTop = Helper.GetScreenBoundTop(camera);
-        halfScreenHeight = Helper.GetScreenBoundTop(camera) / 2;
+        halfScreenHeight = Helper.GetScreenBoundTop(camera)/2;
 
         SpriteRenderer ufoEnemySpriteRenderer = UFOEnemyPrefab.GetComponent<SpriteRenderer>();
         ufoEnemySpriteSize = new Vector2(ufoEnemySpriteRenderer.bounds.size.x, ufoEnemySpriteRenderer.bounds.size.y);

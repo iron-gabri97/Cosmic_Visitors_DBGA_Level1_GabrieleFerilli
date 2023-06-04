@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable, IShooter
 {
     public int Lives;
 
@@ -17,17 +17,18 @@ public class Player : MonoBehaviour
 
     public GameObject BulletPrefab;
     public Sprite BulletSprite;
-    public float TimeBetweenBullets;
+   //public float TimeBetweenBullets;
 
     private float shootTimer;
     private string playerBulletTag = "PlayerBullet";
     private SpriteRenderer bulletRenderer;
     private Vector3 bulletSpawnOffset = Vector3.up;
 
-    private void Awake()
+    private void Awake ()
     {
         Health = PlayerHealth;
         Damage = PlayerDamage;
+
 
         playerStartingPosition = transform.position;
 
@@ -38,7 +39,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         EventManager.Instance.OnGameReInit += ResetPlayerData;
-        EventManager.Instance.OnPlayerDamage += TakeDamage;
 
         EventManager.Instance.StartInitPlayerHealthEvent(Health);
         EventManager.Instance.StartInitPlayerLivesEvent(Lives);
@@ -47,7 +47,6 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         EventManager.Instance.OnGameReInit -= ResetPlayerData;
-        EventManager.Instance.OnPlayerDamage -= TakeDamage;
     }
 
     private void Update()
@@ -59,12 +58,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TakeDamage(GameObject damagedObject, int damage)
+    public void TakeDamage(int damage)
     {
-        if (gameObject == damagedObject)
-        {
             Health -= damage;
-
+            
             EventManager.Instance.StartUpdatePlayerHealthEvent(Health);
 
             if (Health <= 0)
@@ -80,12 +77,11 @@ public class Player : MonoBehaviour
                 if (Lives <= 0)
                     GameController.Instance.GameState = GameController.GAME_STATE.GAME_OVER_STATE;
             }
-        }
     }
 
     public void Shoot()
     {
-        shootTimer = TimeBetweenBullets;
+        shootTimer = 0.5f;
         GameObject playerBullet = Instantiate(BulletPrefab, transform.position + bulletSpawnOffset, Quaternion.identity);
         Helper.UpdateColliderShapeToSprite(playerBullet, BulletSprite);
         playerBullet.tag = playerBulletTag;
@@ -98,7 +94,7 @@ public class Player : MonoBehaviour
 
     private void ResetPlayerData()
     {
-        Lives = 3;
+        Lives = 5;
         transform.position = playerStartingPosition;
     }
 }

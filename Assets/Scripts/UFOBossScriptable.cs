@@ -10,7 +10,6 @@ public class UFOBossScriptable : ScriptableObject
     public Sprite UFOBossSprite;
     public GameObject UFOBossBulletPrefab;
     public Sprite UFOBossBulletSprite;
-    public float TimeBetweenShots;
     public int NumberOfBullets;
     public int MinShotAngle;
     public int MaxShotAngle;

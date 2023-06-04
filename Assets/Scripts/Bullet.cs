@@ -50,31 +50,27 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, new Vector2(BulletDirection.x, BulletDirection.y), 0.1f);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, new Vector2(BulletDirection.x, BulletDirection.y), 0.2f);
+
         foreach (RaycastHit2D hit in hits)
         {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), hit.collider, true);
-
             if (hit.collider.gameObject.CompareTag(playerTag) && this.CompareTag(ufoEnemyBulletTag))
             {
-                EventManager.Instance.StartPlayerDamageEvent(hit.collider.gameObject, bulletDamage);
-
+                ((IDamageable)hit.collider.gameObject.GetComponent(typeof(IDamageable))).TakeDamage(bulletDamage);
                 EventManager.Instance.StartBulletDestroyedEvent(gameObject);
                 Destroy(gameObject);
             }
 
             if (hit.collider.gameObject.CompareTag(ufoEnemyTag) && this.CompareTag(playerBulletTag))
             {
-                EventManager.Instance.StartUFOEnemyDamageEvent(hit.collider.gameObject, bulletDamage);
-
+                ((IDamageable)hit.collider.gameObject.GetComponent(typeof(IDamageable))).TakeDamage(bulletDamage);
                 EventManager.Instance.StartBulletDestroyedEvent(gameObject);
                 Destroy(gameObject);
             }
 
             if (hit.collider.gameObject.CompareTag(ufoBossTag) && this.CompareTag(playerBulletTag))
             {
-                EventManager.Instance.StartUFOEnemyDamageEvent(hit.collider.gameObject, bulletDamage);
-
+                ((IDamageable)hit.collider.gameObject.GetComponent(typeof(IDamageable))).TakeDamage(bulletDamage);
                 EventManager.Instance.StartBulletDestroyedEvent(gameObject);
                 Destroy(gameObject);
             }

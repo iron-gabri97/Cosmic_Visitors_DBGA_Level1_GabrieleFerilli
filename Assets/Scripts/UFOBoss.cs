@@ -32,7 +32,6 @@ public class UFOBoss : MonoBehaviour, IDamageable, IShooter
     private int numberOfBullets;
     private int shotMinAngle, shotMaxAngle;
     private Vector3 bulletSpawnOffset = Vector3.down;
-    private float timeBetweenShots;
     private string ufoEnemyBulletTag = "UFOEnemyBullet";
 
     private void Awake()
@@ -55,19 +54,17 @@ public class UFOBoss : MonoBehaviour, IDamageable, IShooter
 
         halfSpriteSize = new Vector2((ufoBossRenderer.bounds.size.x / 2), (ufoBossRenderer.bounds.size.y / 2));
 
-        timeBetweenShots = UFOBossScriptable.TimeBetweenShots;
+        shootTimer = UnityEngine.Random.Range(0f, 1.0f);
         shotMinAngle = UFOBossScriptable.MinShotAngle;
         shotMaxAngle = UFOBossScriptable.MaxShotAngle;
         numberOfBullets = UFOBossScriptable.NumberOfBullets;
         bulletPrefab = UFOBossScriptable.UFOBossBulletPrefab;
 
         EventManager.Instance.StartInitUFOBossHealthIntEvent(Health);
-        EventManager.Instance.OnUFOEnemyDamage += TakeDamage;
     }
 
     private void OnDisable()
     {
-        EventManager.Instance.OnUFOEnemyDamage -= TakeDamage;
     }
 
     void Update()
@@ -84,7 +81,7 @@ public class UFOBoss : MonoBehaviour, IDamageable, IShooter
 
     public void Shoot()
     {
-        shootTimer = timeBetweenShots;
+        shootTimer = 1.0f;
 
         float angleStep = (shotMaxAngle - shotMinAngle) / numberOfBullets;
         for (int i = 0; i < numberOfBullets; i++)
@@ -103,10 +100,8 @@ public class UFOBoss : MonoBehaviour, IDamageable, IShooter
         }
     }
 
-    public void TakeDamage(GameObject damagedObject, int damage)
+    public void TakeDamage(int damage)
     {
-        if (gameObject == damagedObject)
-        {
             Health -= damage;
             EventManager.Instance.StartUpdateUFOBossHealthIntEvent(Health);
 
@@ -115,22 +110,10 @@ public class UFOBoss : MonoBehaviour, IDamageable, IShooter
                 EventManager.Instance.StartUFOEnemyDefeatEvent(gameObject);
                 Destroy(gameObject);
             }
-        }
     }
 
     private void Move()
     {
-        if (transform.position.x >= boundRight - halfSpriteSize.x)
-        {
-            transform.position = new Vector3(boundRight - (0.1f + halfSpriteSize.x), transform.position.y, transform.position.z);
-            moveState = UFOBOSS_MOVE_STATE.MOVE_LEFT;
-        }
-        else if (transform.position.x <= boundLeft + halfSpriteSize.x)
-        {
-            transform.position = new Vector3(boundLeft + (0.1f + halfSpriteSize.x), transform.position.y, transform.position.z);
-            moveState = UFOBOSS_MOVE_STATE.MOVE_RIGHT;
-        }
-
         if (transform.position.y >= boundTop - halfSpriteSize.y)
         {
             transform.position = new Vector3(transform.position.x, boundTop - halfSpriteSize.y, transform.position.z);
@@ -143,11 +126,25 @@ public class UFOBoss : MonoBehaviour, IDamageable, IShooter
 
             case UFOBOSS_MOVE_STATE.MOVE_RIGHT:
                 transform.position += speed * Time.deltaTime * Vector3.right;
-                break;
+               
+                if (transform.position.x >= boundRight - halfSpriteSize.x)
+                    {
+                        transform.position = new Vector3(boundRight - (0.1f + halfSpriteSize.x), transform.position.y, transform.position.z);
+                        moveState = UFOBOSS_MOVE_STATE.MOVE_LEFT;
+                    }
+
+                    break;
 
             case UFOBOSS_MOVE_STATE.MOVE_LEFT:
                 transform.position += speed * Time.deltaTime * Vector3.left;
-                break;
+
+                if (transform.position.x <= boundLeft + halfSpriteSize.x)
+                     {
+                         transform.position = new Vector3(boundLeft + (0.1f + halfSpriteSize.x), transform.position.y, transform.position.z);
+                         moveState = UFOBOSS_MOVE_STATE.MOVE_RIGHT;
+                     }
+
+                    break;
         }
     }
 }

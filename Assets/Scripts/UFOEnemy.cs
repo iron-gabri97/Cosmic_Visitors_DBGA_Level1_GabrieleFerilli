@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class UFOEnemy : MonoBehaviour, IDamageable, IShooter
@@ -15,14 +16,13 @@ public class UFOEnemy : MonoBehaviour, IDamageable, IShooter
     private Camera camera;
     private Player player;
 
-    private float boundRight;
-    private float boundLeft;
-    private float boundTop;
-    private float boundBottom;
+    private float boundRight= 8.5f;
+    private float boundLeft = -8.5f;
+    private float boundBottom = -3.0f;
 
     private ENEMY_MOVE_STATE moveStatus = 0;
-    private float moveHorizontalAmount = 0.5f;
-    private float moveVerticalAmount;
+    private float moveHorizontalAmount = 0.1f;
+    private float moveVerticalAmount = 0.5f;
     private float moveTimer = 0.5f;
     private bool moveRight = true;
 
@@ -56,24 +56,18 @@ public class UFOEnemy : MonoBehaviour, IDamageable, IShooter
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (spriteRenderer != null)
-            spriteRenderer.sprite = UFOEnemyScriptable.UFOEnemySprite;
-        else
-            Debug.LogWarning("There is no sprite renderer component attached!");
-
         Health = UFOEnemyScriptable.UFOEnemyHealth;
         Damage = UFOEnemyScriptable.UFOEnemyDamage;
+        shootTimer = UnityEngine.Random.Range(0f, 1.5f);
         numberOfBullets = UFOEnemyScriptable.NumberOfBullets;
         shotMinAngle = UFOEnemyScriptable.MinShotAngle;
         shotMaxAngle = UFOEnemyScriptable.MaxShotAngle;
-        timeBetweenShots = UFOEnemyScriptable.TimeBetweenShots;
 
-        EventManager.Instance.OnUFOEnemyDamage += TakeDamage;
     }
 
     private void OnDisable()
     {
-        EventManager.Instance.OnUFOEnemyDamage -= TakeDamage;
+      
     }
 
     private void Update()
@@ -91,25 +85,22 @@ public class UFOEnemy : MonoBehaviour, IDamageable, IShooter
             Shoot();
         }
     }
-    public void TakeDamage(GameObject damagedObject, int damage)
+    public void TakeDamage(int damage)
     {
-        if (gameObject == damagedObject)
-        {
             Health -= damage;
 
-            spriteRenderer.color = Color.black;
+            spriteRenderer.color = Color.magenta;
 
             if (Health <= 0)
             {
                 EventManager.Instance.StartUFOEnemyDefeatEvent(gameObject);
                 Destroy(gameObject);
             }
-        }
     }
 
     public void Shoot()
     {
-        shootTimer = timeBetweenShots;
+        shootTimer = 1.5f;
 
         float angleStep = (shotMaxAngle - shotMinAngle) / numberOfBullets;
         for (int i = 0; i < numberOfBullets; i++)
@@ -132,27 +123,9 @@ public class UFOEnemy : MonoBehaviour, IDamageable, IShooter
     {
         moveTimer = 0.5f;
 
-        if (transform.position.x >= boundRight - halfSpriteSize.x)
+        if (transform.position.y <= boundBottom + halfSpriteSize.y)
         {
-            transform.position = new Vector3(boundRight - (0.1f + halfSpriteSize.x), transform.position.y, transform.position.z);
-            moveStatus = ENEMY_MOVE_STATE.MOVE_DOWN;
-            moveRight = false;
-        }
-        else if (transform.position.x <= boundLeft + halfSpriteSize.x)
-        {
-            transform.position = new Vector3(boundLeft + (0.1f + halfSpriteSize.x), transform.position.y, transform.position.z);
-            moveStatus = ENEMY_MOVE_STATE.MOVE_DOWN;
-            moveRight = true;
-        }
-
-        if (transform.position.y >= boundTop - halfSpriteSize.y)
-        {
-            transform.position = new Vector3(transform.position.x, halfSpriteSize.y, transform.position.z);
-        }
-
-        if (transform.position.y < boundBottom + halfSpriteSize.y)
-        {
-            player.Lives--;
+            player.Lives = 0;
         }
 
         switch (moveStatus)
@@ -162,10 +135,24 @@ public class UFOEnemy : MonoBehaviour, IDamageable, IShooter
 
             case ENEMY_MOVE_STATE.MOVE_RIGHT:
                 transform.Translate(new Vector3(moveHorizontalAmount, 0, 0));
+               
+                if (transform.position.x >= boundRight - halfSpriteSize.x)
+                {
+                    transform.position = new Vector3(boundRight - (halfSpriteSize.x), transform.position.y, transform.position.z);
+                    moveStatus = ENEMY_MOVE_STATE.MOVE_DOWN;
+                    moveRight = false;
+                }
                 break;
 
             case ENEMY_MOVE_STATE.MOVE_LEFT:
                 transform.Translate(new Vector3(-moveHorizontalAmount, 0, 0));
+                
+                if (transform.position.x <= boundLeft + halfSpriteSize.x)
+                {
+                    transform.position = new Vector3(boundLeft + (halfSpriteSize.x), transform.position.y, transform.position.z);
+                    moveStatus = ENEMY_MOVE_STATE.MOVE_DOWN;
+                    moveRight = true;
+                }
                 break;
                    
             case ENEMY_MOVE_STATE.MOVE_DOWN:
@@ -175,7 +162,7 @@ public class UFOEnemy : MonoBehaviour, IDamageable, IShooter
                 {
                     moveStatus = ENEMY_MOVE_STATE.MOVE_RIGHT;
                 }
-                else if (!moveRight)
+                else
                 {
                     moveStatus = ENEMY_MOVE_STATE.MOVE_LEFT;
                 }
