@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c800a8999aa2b488c713e4662bfce5, type: 3}
   m_Name: New UFOEnemy
   m_EditorClassIdentifier: 
-  UFOEnemyHealth: 1
-  UFOEnemyDamage: 1
-  UFOEnemySprite: {fileID: 21300000, guid: d68cdc96b5f565e43924556f925b1b1a, type: 3}
+  UFOEnemyHealth: 2
+  UFOEnemyDamage: 3
+  UFOEnemySprite: {fileID: -646736222, guid: d68cdc96b5f565e43924556f925b1b1a, type: 3}
   UFOEnemyBulletPrefab: {fileID: 6174548050345330627, guid: c4063e79bf5125c47a76071fdf41ddab, type: 3}
   UFOEnemyBulletSprite: {fileID: 1263386619, guid: 062e83ee7c6c3a84f807b494795a151e, type: 3}
-  TimeBetweenShots: 2
   NumberOfBullets: 2
-  MinShotAngle: -50
-  MaxShotAngle: 50
+  MinShotAngle: -40
+  MaxShotAngle: 40

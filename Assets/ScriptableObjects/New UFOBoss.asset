@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869f295c87b930443b46d1c530cc47da, type: 3}
   m_Name: New UFOBoss
   m_EditorClassIdentifier: 
-  UFOBossHealth: 10
-  UFOBossDamage: 1
-  UFOBossSprite: {fileID: 21300000, guid: 171149fd9884681439f583e21731ee9b, type: 3}
+  UFOBossHealth: 20
+  UFOBossDamage: 5
+  UFOBossSprite: {fileID: 1534188052, guid: 171149fd9884681439f583e21731ee9b, type: 3}
   UFOBossBulletPrefab: {fileID: 6174548050345330627, guid: c4063e79bf5125c47a76071fdf41ddab, type: 3}
   UFOBossBulletSprite: {fileID: 1263386619, guid: 062e83ee7c6c3a84f807b494795a151e, type: 3}
-  TimeBetweenShots: 0.5
   NumberOfBullets: 4
-  MinShotAngle: -30
-  MaxShotAngle: 30
+  MinShotAngle: -50
+  MaxShotAngle: 50
